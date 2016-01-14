@@ -1,4 +1,4 @@
-package com.designpatterns.summary;
+package com.designpatterns.twitter.summary;
 
 
 import java.io.IOException;

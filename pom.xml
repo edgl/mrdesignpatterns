@@ -15,8 +15,14 @@
   <dependencies>
   <dependency>
   	<groupId>org.apache.hadoop</groupId>
-  	<artifactId>hadoop-core</artifactId>
-  	<version>1.2.1</version>
+  	<artifactId>hadoop-common</artifactId>
+  	<version>2.7.1</version>
+  	<scope>provided</scope>
+  </dependency>
+  <dependency>
+  	<groupId>org.apache.hadoop</groupId>
+  	<artifactId>hadoop-mapreduce-client-core</artifactId>
+  	<version>2.7.1</version>
   	<scope>provided</scope>
   </dependency>
   <dependency>
@@ -48,6 +54,13 @@
 		  	</executions>
 		  	<configuration>
 		  		<minimizeJar>true</minimizeJar>
+		  		<filters>
+		  			<filter>
+		  				<excludes>
+		  					<exclude>org.apache.hadoop:hadoop-core</exclude>
+		  				</excludes>
+		  			</filter>
+		  		</filters>
 		  	</configuration>
   		</plugin>
   	</plugins>

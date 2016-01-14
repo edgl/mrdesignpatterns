@@ -13,56 +13,41 @@ public class MinMaxCountTuple implements Writable {
 	private Date min = new Date();
 	private Date max = new Date();
 	private long count = 0;
-	
-	public final static SimpleDateFormat frmt = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZZ yyyy");
-	
-	
-	public void readFields(DataInput in) throws IOException {
-		// Read the data out in the order it is written,
-		// creating the new date objects from the UNIX timestamp
-		min = new Date(in.readLong());
-		max = new Date(in.readLong());
-		count = in.readLong();
-
+	private static final SimpleDateFormat frmt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSS");
+	public Date getMin() {
+		return min;
 	}
-
-	public void write(DataOutput out) throws IOException {
-		// write the data out in the order it is read,
-		// using the UNIX timestamp to represent the date
-		out.writeLong(min.getTime());
-		out.writeLong(max.getTime());
-		out.writeLong(count);
-
+	public void setMin(Date min) {
+		this.min = min;
+	}
+	public Date getMax() {
+		return max;
+	}
+	public void setMax(Date max) {
+		this.max = max;
+	}
+	public long getCount() {
+		return count;
+	}
+	public void setCount(long count) {
+		this.count = count;
+	}
+	public void readFields(DataInput input) throws IOException {
+		min = new Date(input.readLong());
+		max = new Date(input.readLong());
+		count = input.readLong();
+		
+	}
+	public void write(DataOutput output) throws IOException {
+		output.writeLong(min.getTime());
+		output.writeLong(max.getTime());
+		output.writeLong(count);
+		
+		
 	}
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return frmt.format(min) + "\t" + frmt.format(max) + "\t" + count;
 	}
-
-	public Date getMin() {
-		return min;
-	}
-
-	public void setMin(Date min) {
-		this.min = min;
-	}
-
-	public Date getMax() {
-		return max;
-	}
-
-	public void setMax(Date max) {
-		this.max = max;
-	}
-
-	public long getCount() {
-		return count;
-	}
-
-	public void setCount(long count) {
-		this.count = count;
-	}
-
 }
